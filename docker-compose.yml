@@ -1,0 +1,31 @@
+version: "3"
+ 
+volumes:
+  booked-data-config:      
+  booked-data-adconfig:      
+  booked-data-uploads:      
+  booked-data-web-uploads:      
+  booked-data-web-img:
+      
+services:
+  booked:
+    image: jacq/docker-booked
+    environment:
+      - TZ=Europe/Madrid
+      - AD_DOMAIN_CONTROLLERS=
+      - AD_PORT=
+      - AD_USERNAME=
+      - AD_PASSWORD=
+      - AD_BASEDN=
+      - AD_VERSION=
+      - AD_USE_SSL=
+      - AD_ACCOUNT_SUFFIX=
+      - AD-DATABASE-AUTH-WHEN-LDAP-USER-NOT-FOUND=
+      - AD_ATTRIBUTE_MAPPING=
+    ports:
+      - 80:80
+    volumes:
+      - booked-data-uploads:/var/www/booked/uploads
+      - booked-data-web-uploads:/var/www/booked/Web/uploads
+      - booked-data-web-img:/var/www/booked/Web/img
+      - booked-data-config:/var/www/booked/config
